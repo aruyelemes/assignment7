@@ -23,7 +23,7 @@ public class Book {
     private String description;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     @JoinColumn(name = "category_id")
     private Category category;

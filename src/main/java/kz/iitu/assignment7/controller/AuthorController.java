@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/authors")
 public class AuthorController {
     @Autowired
     private AuthorRepository authorRepository;
 
-    @GetMapping("authors")
+    @GetMapping("")
     public List<Author> getAllAuthors() {
         return (List<Author>) authorRepository.findAll();
     }

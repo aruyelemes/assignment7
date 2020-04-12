@@ -1,6 +1,8 @@
 package kz.iitu.assignment7.controller;
 
+import kz.iitu.assignment7.model.Book;
 import kz.iitu.assignment7.model.Category;
+import kz.iitu.assignment7.repository.BookRepository;
 import kz.iitu.assignment7.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/categories")
 public class CategoryController {
 
@@ -17,7 +19,7 @@ public class CategoryController {
 
     @GetMapping("")
     public List<Category> getAllCategories(){
-        return (List<Category>) categoryRepository.findAll();
+        return categoryRepository.findAll();
     }
 
     @GetMapping("/categories/{id}")

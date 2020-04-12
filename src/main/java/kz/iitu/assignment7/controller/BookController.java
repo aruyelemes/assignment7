@@ -13,15 +13,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@Controller
+@RestController
 @RequestMapping("/books")
 public class BookController {
+
     @Autowired
     private BookRepository bookRepository;
 
-    @GetMapping("books")
+    @GetMapping("")
     public List<Book> getAllBooks() {
-        return (List<Book>) bookRepository.findAll();
+        return bookRepository.findAll();
     }
 
     @GetMapping("/books/{id}")
