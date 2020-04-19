@@ -21,9 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/users/login", "/users/register", "/").anonymous()
                 .antMatchers("/users/list/**").permitAll()
-                .antMatchers("/users/create").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JwtTokenGeneratorFilter(authenticationManager()))

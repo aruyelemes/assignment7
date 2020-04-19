@@ -3,8 +3,12 @@ package kz.iitu.assignment7.controller;
 import kz.iitu.assignment7.model.User;
 import kz.iitu.assignment7.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -20,7 +24,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/create")
+    @PostMapping("/register")
     public void createUser(@RequestParam(name = "id") Long id,
                            @RequestParam(name = "surname") String surname,
                            @RequestParam(name = "username") String username,
@@ -32,5 +36,13 @@ public class UserController {
             System.out.println("Username already exists");
         }
     }
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response, Authentication auth) {
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return null;
+    }
+
 
 }
