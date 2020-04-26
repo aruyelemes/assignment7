@@ -24,8 +24,18 @@ public class User {
 
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    private UserType userType;
+    @Column(unique = true)
+    private String username;
+
+    private String password;
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
+    )
+    private List<Role> roles;
 
 
 
@@ -37,7 +47,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"))
     private List<Book> books;
 
-
+    public User(Long id, String surname, String username, String password) {
+    }
 
 
     public void addBook(Book book){
